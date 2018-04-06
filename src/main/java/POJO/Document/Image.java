@@ -1,4 +1,4 @@
-package POJO;
+package POJO.Document;
 
 import io.dummymaker.annotation.special.GenEnumerate;
 import io.dummymaker.annotation.string.GenString;

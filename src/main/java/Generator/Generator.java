@@ -1,4 +1,4 @@
-package generator;
+package Generator;
 
 import POJO.*;
 import io.dummymaker.export.IExporter;
@@ -17,16 +17,16 @@ public class Generator {
     private List<Integer> groupsIds = new ArrayList<>();
     private List<Integer> imagesIds = new ArrayList<>();
     private List<Integer> newsIds = new ArrayList<>();
-    private List<Integer> profilesIds = new ArrayList<>();
+    private List<Integer> usersIds = new ArrayList<>();
     private List<Integer> videosIds = new ArrayList<>();
 
     public void generate(){
-        commentsIds = generateClass(Comment.class,51);
-        groupsIds = generateClass(Group.class,18);
-        imagesIds = generateClass(Image.class,12);
-        newsIds = generateClass(News.class,30);
-        profilesIds = generateClass(Profile.class, 100);
-        videosIds = generateClass(Video.class, 100);
+        commentsIds = generateClass(Comment.class,20);
+        groupsIds = generateClass(Group.class,20);
+        imagesIds = generateClass(Image.class,20);
+        newsIds = generateClass(News.class,20);
+        usersIds = generateClass(User.class, 20);
+        videosIds = generateClass(Video.class, 20);
     }
 
     private <T extends DBObject> List<Integer> generateClass(Class<T> tClass, int amount){

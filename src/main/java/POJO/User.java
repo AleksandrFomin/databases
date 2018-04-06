@@ -7,7 +7,7 @@ import io.dummymaker.annotation.time.GenTime;
 
 import java.util.Date;
 
-public class Profile implements DBObject {
+public class User implements DBObject {
 
     @GenEnumerate(from = 1)
     private Integer id;

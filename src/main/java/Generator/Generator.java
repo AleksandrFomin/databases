@@ -2,6 +2,7 @@ package Generator;
 
 import POJO.Column.*;
 import POJO.Document.*;
+import POJO.Graph.*;
 import io.dummymaker.export.IExporter;
 import io.dummymaker.export.impl.CsvExporter;
 import io.dummymaker.factory.IProduceFactory;
@@ -38,6 +39,16 @@ public class Generator {
         generateClass(UserLikeNews.class, 20);
         generateClass(UserRepostNews.class, 20);
         generateClass(UserWriteComment.class, 20);
+
+        generateClass(UserFriendUser.class, 20);
+        generateClass(UserFollowerGroup.class, 20);
+        generateClass(NewsHasVideo.class, 20);
+        generateClass(NewsHasImage.class, 20);
+        generateClass(UserAuthorComment.class, 20);
+        generateClass(NewsHasComment.class, 20);
+        generateClass(GroupHasNews.class, 20);
+        generateClass(GroupHasVideo.class, 20);
+        generateClass(GroupHasImage.class, 20);
     }
 
     private <T extends DBObject> List<Integer> generateClass(Class<T> tClass, int amount) {

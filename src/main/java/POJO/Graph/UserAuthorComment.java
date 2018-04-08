@@ -1,15 +1,15 @@
 package POJO.Graph;
 
-import Generator.Interfaces.GenGroupId;
+import Generator.Interfaces.GenCommentId;
 import Generator.Interfaces.GenUserId;
 import POJO.Document.DBObject;
 
-public class UserFollowerGroup implements DBObject {
+public class UserAuthorComment implements DBObject {
     @GenUserId
     private Integer userId;
 
-    @GenGroupId
-    private Integer groupId;
+    @GenCommentId
+    private Integer commentId;
 
     @Override
     public Integer getId() {

@@ -7,7 +7,7 @@ import java.util.Random;
 public class NewsIdGenerator implements IGenerator<Integer> {
     @Override
     public Integer generate() {
-        int maxNumber = 20;
+        int maxNumber = 200000;
 
         Random r = new Random();
         return r.nextInt(maxNumber)+1;

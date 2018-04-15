@@ -1,19 +1,18 @@
 package POJO.Graph;
 
-import Generator.Interfaces.GenUserId;
 import POJO.Document.DBObject;
 import io.dummymaker.annotation.special.GenForceExport;
 
-public class UserFriendUser implements DBObject {
-    public UserFriendUser(Integer userId1, Integer userId2) {
+public class UserLikesNews implements DBObject {
+    public UserLikesNews(Integer userId1, Integer newsId) {
         this.userId1 = userId1;
-        this.userId2 = userId2;
+        this.newsId = newsId;
     }
     @GenForceExport
     private Integer userId1;
 
     @GenForceExport
-    private Integer userId2;
+    private Integer newsId;
 
     @Override
     public Integer getId() {

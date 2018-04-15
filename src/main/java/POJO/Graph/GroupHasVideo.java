@@ -3,12 +3,17 @@ package POJO.Graph;
 import Generator.Interfaces.GenGroupId;
 import Generator.Interfaces.GenVideoId;
 import POJO.Document.DBObject;
+import io.dummymaker.annotation.special.GenForceExport;
 
 public class GroupHasVideo implements DBObject {
-    @GenGroupId
-    private Integer groupId;
 
-    @GenVideoId
+    public GroupHasVideo(Integer groupId, Integer videoId) {
+        this.groupId = groupId;
+        this.videoId = videoId;
+    }
+    @GenForceExport
+    private Integer groupId;
+    @GenForceExport
     private Integer videoId;
 
     @Override

@@ -22,33 +22,97 @@ public class Generator {
     private List<Integer> usersIds = new ArrayList<>();
     private List<Integer> videosIds = new ArrayList<>();
 
+    private List<AddFriend> addFriends = new ArrayList<>();
+    private List<GroupAddImage> groupAddImages = new ArrayList<>();
+    private List<GroupAddNews> groupAddNews = new ArrayList<>();
+    private List<GroupAddVideo> groupAddVideos = new ArrayList<>();
+    private List<SubscribeGroup> subscribeGroups = new ArrayList<>();
+    private List<UserLikeImage> userLikeImages = new ArrayList<>();
+    private List<UserLikeNews> userLikeNews = new ArrayList<>();
+    private List<UserRepostNews> userRepostNews = new ArrayList<>();
+    private List<UserWriteComment> userWriteComments = new ArrayList<>();
+
+    private List<GroupHasImage> groupHasImages = new ArrayList<>();
+    private List<GroupHasNews> groupHasNews = new ArrayList<>();
+    private List<GroupHasVideo> groupHasVideos = new ArrayList<>();
+    private List<NewsHasComment> newsHasComments = new ArrayList<>();
+    private List<NewsHasImage> newsHasImages = new ArrayList<>();
+    private List<NewsHasVideo> newsHasVideos = new ArrayList<>();
+    private List<UserAuthorComment> userAuthorComments = new ArrayList<>();
+    private List<UserFollowerGroup> userFollowerGroups = new ArrayList<>();
+    private List<UserFriendUser> userFriendUsers = new ArrayList<>();
+    private List<UserLikesImage> userLikesImages = new ArrayList<>();
+    private List<UserLikesNews> userLikesNews = new ArrayList<>();
+    private List<UserRepostsNews> userRepostsNews = new ArrayList<>();
+
     public void generate() {
-        commentsIds = generateClass(Comment.class, 20);
-        groupsIds = generateClass(Group.class, 20);
-        imagesIds = generateClass(Image.class, 20);
-        newsIds = generateClass(News.class, 20);
-        usersIds = generateClass(User.class, 20);
-        videosIds = generateClass(Video.class, 20);
+        commentsIds = generateClass(Comment.class, 200000);
+        groupsIds = generateClass(Group.class, 20000);
+        imagesIds = generateClass(Image.class, 20000);
+        newsIds = generateClass(News.class, 200000);
+        usersIds = generateClass(User.class, 2000000);
+        videosIds = generateClass(Video.class, 2000);
 
-        generateClass(AddFriend.class, 20);
-        generateClass(GroupAddImage.class, 20);
-        generateClass(GroupAddNews.class, 20);
-        generateClass(GroupAddVideo.class, 20);
-        generateClass(SubscribeGroup.class, 20);
-        generateClass(UserLikeImage.class, 20);
-        generateClass(UserLikeNews.class, 20);
-        generateClass(UserRepostNews.class, 20);
-        generateClass(UserWriteComment.class, 20);
+        addFriends = generateForColumn(AddFriend.class, 1000000);
+        groupAddImages = generateForColumn(GroupAddImage.class, 20000);
+        groupAddNews = generateForColumn(GroupAddNews.class, 200000);
+        groupAddVideos = generateForColumn(GroupAddVideo.class, 2000);
+        subscribeGroups = generateForColumn(SubscribeGroup.class, 2000000);
+        userLikeImages = generateForColumn(UserLikeImage.class, 2000000);
+        userLikeNews = generateForColumn(UserLikeNews.class, 2000000);
+        userRepostNews = generateForColumn(UserRepostNews.class, 2000000);
+        userWriteComments = generateForColumn(UserWriteComment.class, 200000);
 
-        generateClass(UserFriendUser.class, 20);
-        generateClass(UserFollowerGroup.class, 20);
-        generateClass(NewsHasVideo.class, 20);
-        generateClass(NewsHasImage.class, 20);
-        generateClass(UserAuthorComment.class, 20);
-        generateClass(NewsHasComment.class, 20);
-        generateClass(GroupHasNews.class, 20);
-        generateClass(GroupHasVideo.class, 20);
-        generateClass(GroupHasImage.class, 20);
+        for(AddFriend a: addFriends){
+            userFriendUsers.add(new UserFriendUser(a.getUserId1(),a.getUserId2()));
+        }
+        exporter.export(userFriendUsers);
+
+        for(SubscribeGroup a: subscribeGroups){
+            userFollowerGroups.add(new UserFollowerGroup(a.getUserId(),a.getGroupId()));
+        }
+        exporter.export(userFollowerGroups);
+
+        for(GroupAddNews a: groupAddNews){
+            groupHasNews.add(new GroupHasNews(a.getGroupId(),a.getNewsId()));
+        }
+        exporter.export(groupHasNews);
+
+        for(GroupAddImage a: groupAddImages){
+            groupHasImages.add(new GroupHasImage(a.getGroupId(),a.getImageId()));
+        }
+        exporter.export(groupHasImages);
+
+        for(GroupAddVideo a: groupAddVideos){
+            groupHasVideos.add(new GroupHasVideo(a.getGroupId(),a.getVideoId()));
+        }
+        exporter.export(groupHasVideos);
+
+        for(UserWriteComment a: userWriteComments){
+            userAuthorComments.add(new UserAuthorComment(a.getUserId(),a.getCommentId()));
+            newsHasComments.add(new NewsHasComment(a.getNewsId(),a.getCommentId()));
+        }
+        exporter.export(userAuthorComments);
+        exporter.export(newsHasComments);
+
+        for(UserLikeNews a: userLikeNews){
+            userLikesNews.add(new UserLikesNews(a.getUserId(),a.getNewsId()));
+        }
+        exporter.export(userLikesNews);
+
+        for(UserLikeImage a: userLikeImages){
+            userLikesImages.add(new UserLikesImage(a.getUserId(),a.getImageId()));
+        }
+        exporter.export(userLikesImages);
+
+        for(UserRepostNews a: userRepostNews){
+            userRepostsNews.add(new UserRepostsNews(a.getUserId(),a.getNewsId()));
+        }
+        exporter.export(userRepostsNews);
+
+        generateClass(NewsHasImage.class, 150000);
+        generateClass(NewsHasVideo.class, 50000);
+
     }
 
     private <T extends DBObject> List<Integer> generateClass(Class<T> tClass, int amount) {
@@ -59,5 +123,11 @@ public class Generator {
             ids.add(el.getId());
         }
         return ids;
+    }
+
+    private <T extends DBObject> List<T> generateForColumn(Class<T> tClass, int amount){
+        List<T> list = factory.produce(tClass, amount);
+        exporter.export(list);
+        return list;
     }
 }

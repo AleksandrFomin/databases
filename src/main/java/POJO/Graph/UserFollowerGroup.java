@@ -3,12 +3,16 @@ package POJO.Graph;
 import Generator.Interfaces.GenGroupId;
 import Generator.Interfaces.GenUserId;
 import POJO.Document.DBObject;
+import io.dummymaker.annotation.special.GenForceExport;
 
 public class UserFollowerGroup implements DBObject {
-    @GenUserId
+    public UserFollowerGroup(Integer userId, Integer groupId) {
+        this.userId = userId;
+        this.groupId = groupId;
+    }
+    @GenForceExport
     private Integer userId;
-
-    @GenGroupId
+    @GenForceExport
     private Integer groupId;
 
     @Override

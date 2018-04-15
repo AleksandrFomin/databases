@@ -1,14 +1,17 @@
 package POJO.Graph;
 
-import Generator.Interfaces.GenGroupId;
-import Generator.Interfaces.GenImageId;
 import POJO.Document.DBObject;
+import io.dummymaker.annotation.special.GenForceExport;
 
 public class GroupHasImage implements DBObject {
-    @GenGroupId
-    private Integer groupId;
 
-    @GenImageId
+    public GroupHasImage(Integer groupId, Integer imageId) {
+        this.groupId = groupId;
+        this.imageId = imageId;
+    }
+    @GenForceExport
+    private Integer groupId;
+    @GenForceExport
     private Integer imageId;
 
     @Override

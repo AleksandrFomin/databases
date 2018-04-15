@@ -4,6 +4,7 @@ import Generator.Interfaces.GenGroupId;
 import Generator.Interfaces.GenUserId;
 import POJO.Document.DBObject;
 import io.dummymaker.annotation.time.GenDate;
+import io.dummymaker.annotation.time.GenTimestamp;
 
 import java.util.Date;
 
@@ -14,11 +15,19 @@ public class SubscribeGroup implements DBObject {
     @GenGroupId
     private Integer groupId;
 
-    @GenDate
+    @GenTimestamp
     private Date actionDate;
 
     @Override
     public Integer getId() {
         return null;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
     }
 }

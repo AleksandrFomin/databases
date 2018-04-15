@@ -5,6 +5,11 @@ import Generator.Interfaces.GenNewsId;
 import POJO.Document.DBObject;
 
 public class NewsHasImage implements DBObject {
+
+//    public NewsHasImage(Integer newsId, Integer imageId) {
+//        this.newsId = newsId;
+//        this.imageId = imageId;
+//    }
     @GenNewsId
     private Integer newsId;
 
